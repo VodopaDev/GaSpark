@@ -1,37 +1,43 @@
 package rdd
-import DataEntry.{FullDataEntry, GasType, LocationType}
+import java.io.PrintWriter
+
+import dataentry.{GasDataEntry, GasType, StationType}
 import org.apache.spark.{SparkConf, SparkContext}
 
-import scala.xml.XML
+import scala.xml.{Elem, Node, XML}
 
-private object RDDFileCreator {
+private object RDDFileCreator extends App{
 
-  private val appName = "GaSpark-Create"
-  private val numberOfThreads = Runtime.getRuntime.availableProcessors()
-  private lazy val conf = new SparkConf()
-    .setAppName(appName)
-    .setMaster(s"local[$numberOfThreads]")
-    .set("spark.executor.memory", "2g")
-  val sc = SparkContext.getOrCreate(conf)
+  def createYearlyRDD(year: Int): Unit = {
+    val start = System.currentTimeMillis()
+    val dst = new PrintWriter(s"resources/rdd/$year")
 
-  private def createYearlyRDD(year: Int) = {
-    val xml = XML.loadFile(s"resources/sanitized/$year.xml")
-    val entries = (xml\"pdv").par.flatMap(n =>
-      (n\"prix").map(p =>
-        FullDataEntry(
-          postalCode = (n \@ "cp").toInt,
-          locationType = LocationType.fromString(n \@ "pop"),
-          price = (p \@ "valeur").toInt,
-          gasType = GasType.fromString(p \@ "nom"),
-          date = DataEntry.dateFromXML(p \@ "maj"))
-      )
-    )
-    val newRdd = sc.parallelize(entries.seq).cache()
-    newRdd.saveAsObjectFile(s"resources/rdd/$year-obj")
-    newRdd.saveAsTextFile(s"resources/rdd/$year-txt")
+    def isValid(e: GasDataEntry): Boolean = {
+      (e.gasType != GasType.UNDEFINED) &&
+        (e.stationType != StationType.UNDEFINED) &&
+        (e.price >= 300)
+    }
+
+    (XML.loadFile(s"resources/sanitized/$year.xml") \ "pdv").toIterator
+      .foreach(n => {
+        val department = (n \@ "cp")
+        val seller = (n \@ "id")
+        val roadType = (n \@ "pop")
+        (n \ "prix").foreach(p => {
+          val entry = GasDataEntry.fromStringArguments(
+            seller,
+            department,
+            roadType,
+            (p \@ "nom"),
+            (p \@ "valeur"),
+            (p \@ "maj"))
+          if (isValid(entry)) dst.println(entry)
+        })
+
+    })
+    println(s"Year $year took " + (System.currentTimeMillis() - start) + "ms to complete")
   }
 
-  def main(args: Array[String]): Unit = {
-    (2007 to 2019).foreach(createYearlyRDD)
-  }
+  (2018 to 2018).foreach(createYearlyRDD)
+
 }
