@@ -1,8 +1,7 @@
 package dataentry
-
-import dataentry.GasType.GasType
 import dataentry.GasDataEntry.{Department, Price, SellerID}
-import dataentry.StationType.StationTypeValue
+import dataentry.GasTypeEnum.GasType
+import dataentry.StationTypeEnum.StationType
 
 /**
  * Case class to represent a selling entry in some gas station
@@ -13,15 +12,13 @@ import dataentry.StationType.StationTypeValue
  * @param price price of the gas type
  * @param date date at which the gas price was updated
  */
-case class GasDataEntry(sellerId: SellerID, department: Department, stationType: StationTypeValue, gasType: GasType, price: Price, date: Date){
+case class GasDataEntry(sellerId: SellerID, department: Department, stationType: StationType, gasType: GasType, price: Price, date: Date){
 
   /**
    * Return a String representation of a GasDataEntry as a csv line
    * @return csv line with all the case class values
    */
-  override def toString: String = {
-    s"$sellerId;$department;$stationType;$gasType;$price;$date"
-  }
+  override def toString: String = s"$sellerId;$department;$stationType;$gasType;$price;$date"
 
 }
 
@@ -48,8 +45,8 @@ object GasDataEntry{
     GasDataEntry(
       sellerId.toInt,
       department.toInt,
-      StationType.fromString(stationType),
-      GasType.fromString(gasType),
+      StationTypeEnum.fromString(stationType),
+      GasTypeEnum.fromString(gasType),
       price.toInt,
       Date(date)
     )
@@ -66,8 +63,8 @@ object GasDataEntry{
         GasDataEntry(
           sellerIdStr.toInt,
           countyStr.toInt,
-          StationType.fromString(stationTypeStr),
-          GasType.fromString(gasTypeStr),
+          StationTypeEnum.fromString(stationTypeStr),
+          GasTypeEnum.fromString(gasTypeStr),
           priceStr.toInt,
           Date(dateStr)
         )

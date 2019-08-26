@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat
 
 import org.apache.spark.sql.SparkSession
 import com.databricks.spark.xml._
-import dataentry.{GasDataEntry, GasType, StationType}
+import dataentry.{GasDataEntry, GasTypeEnum, StationTypeEnum}
 import org.apache.spark.{SparkConf, SparkContext}
 import org.apache.spark.rdd.RDD
 import org.apache.spark.sql.functions.explode
@@ -26,15 +26,15 @@ object RDDLoader {
     val b4 = System.currentTimeMillis()
 
     val gazole = getRangeRdd()
-        .filter(_.gasType == GasType.GAZOLE)
+        .filter(_.gasType == GasTypeEnum.GAZOLE)
         .map(e => ((e.stationType, (e.date.year, e.date.month)), (1, e.price.toLong)))
         .reduceByKey((t1, t2) => (t1._1 + t2._1, t1._2 + t2._2))
         .mapValues {case (count, total) => total / count}
         .map{ case ((station, date), avg) => (date, (station, avg))}
         .cache()
 
-    val highwayGazole = gazole.filter{ case (_, (station,_)) => station == StationType.Highway}.sortBy(_._1)
-    val roadGazole = gazole.filter{ case (_, (station,_)) => station == StationType.Road}.sortBy(_._1)
+    val highwayGazole = gazole.filter{ case (_, (station,_)) => station == StationTypeEnum.HIGHWAY}.sortBy(_._1)
+    val roadGazole = gazole.filter{ case (_, (station,_)) => station == StationTypeEnum.ROAD}.sortBy(_._1)
     val zip = highwayGazole.zip(roadGazole)
         .map{ case ( (year, (_, priceHighway)), (_, (_,priceRoad))) => (year, priceHighway, priceRoad)}
 
@@ -80,7 +80,7 @@ object RDDLoader {
     .map(y => sc.textFile("resources/rdd/" + y))
     .reduce((acc, rdd) => acc.union(rdd))
     .map(GasDataEntry.fromRDDLine)
-    .filter(e => e.price > 300 && e.stationType != StationType.Undefined && e.gasType != GasType.UNDEFINED)
+    .filter(e => e.price > 300 && e.stationType != StationTypeEnum.UNDEFINED && e.gasType != GasTypeEnum.UNDEFINED)
 
   /**
    * Clamped a given year so its correspond to a valid RDD

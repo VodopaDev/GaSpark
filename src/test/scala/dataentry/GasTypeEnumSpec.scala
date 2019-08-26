@@ -1,9 +1,9 @@
 package dataentry
 
 import org.scalatest.WordSpec
-import dataentry.GasType._
+import dataentry.GasTypeEnum._
 
-class GasTypeSpec extends WordSpec{
+class GasTypeEnumSpec extends WordSpec{
   "GasType" should{
 
     "return the correct gas type" when {

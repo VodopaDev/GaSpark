@@ -10,11 +10,11 @@ class GasDataEntrySpec extends WordSpec{
 
       "created from class constructor" in {
         val date = Date(2018,1,31)
-        val entry = new GasDataEntry(1, 2, StationType.Highway, GasType.E10, 100, Date("2018-01-31"))
+        val entry = new GasDataEntry(1, 2, StationTypeEnum.HIGHWAY, GasTypeEnum.E10, 100, Date("2018-01-31"))
         assert(entry.sellerId == 1)
         assert(entry.department == 2)
-        assert(entry.stationType == StationType.Highway)
-        assert(entry.gasType == GasType.E10)
+        assert(entry.stationType == StationTypeEnum.HIGHWAY)
+        assert(entry.gasType == GasTypeEnum.E10)
         assert(entry.price == 100)
         assert(entry.date == date)
       }
@@ -23,8 +23,8 @@ class GasDataEntrySpec extends WordSpec{
         val entry = fromRDDLine("1;2;A;E10;100;2018-01-31")
         assert(entry.sellerId == 1)
         assert(entry.department == 2)
-        assert(entry.stationType == StationType.Highway)
-        assert(entry.gasType == GasType.E10)
+        assert(entry.stationType == StationTypeEnum.HIGHWAY)
+        assert(entry.gasType == GasTypeEnum.E10)
         assert(entry.price == 100)
         assert(entry.date == Date(2018,1,31))
       }
@@ -33,8 +33,8 @@ class GasDataEntrySpec extends WordSpec{
         val entry = fromStringArguments("1","2","A","E10","100","2018-01-31")
         assert(entry.sellerId == 1)
         assert(entry.department == 2)
-        assert(entry.stationType == StationType.Highway)
-        assert(entry.gasType == GasType.E10)
+        assert(entry.stationType == StationTypeEnum.HIGHWAY)
+        assert(entry.gasType == GasTypeEnum.E10)
         assert(entry.price == 100)
         assert(entry.date == Date(2018,1,31))
       }

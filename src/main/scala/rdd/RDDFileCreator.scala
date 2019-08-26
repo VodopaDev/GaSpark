@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat
 import org.apache.spark.SparkConf
 import org.apache.spark.sql.functions.explode
 import com.databricks.spark.xml._
-import dataentry.{Date, GasDataEntry, GasType, StationType}
+import dataentry.{Date, GasDataEntry, GasTypeEnum, StationTypeEnum}
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.types._
 
@@ -47,8 +47,8 @@ private object RDDFileCreator extends App{
         GasDataEntry(
           r.getLong(r.fieldIndex("_cp")).toInt,
           r.getLong(r.fieldIndex("_id")).toInt,
-          StationType.fromString(r.getString(r.fieldIndex("_pop"))),
-          GasType.fromString(r.getString(r.fieldIndex("_nom"))),
+          StationTypeEnum.fromString(r.getString(r.fieldIndex("_pop"))),
+          GasTypeEnum.fromString(r.getString(r.fieldIndex("_nom"))),
           r.getLong(r.fieldIndex("_valeur")).toInt,
           Date(r.getString(r.fieldIndex("_maj")))
         )
@@ -67,8 +67,8 @@ private object RDDFileCreator extends App{
   private def isValidGasEntry(e: GasDataEntry): Boolean = {
     (e.date < Date(2020,0,0) && e.date > Date(2006,12,31)) &&
       e.price > 300 &&
-      e.gasType != GasType.UNDEFINED&&
-      e.stationType != StationType.Undefined &&
+      e.gasType != GasTypeEnum.UNDEFINED&&
+      e.stationType != StationTypeEnum.UNDEFINED &&
       e.department > 0 &&
       e.sellerId > 0
   }
