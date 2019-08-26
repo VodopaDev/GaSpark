@@ -24,7 +24,11 @@ case class GasDataEntry(sellerId: SellerID, department: Department, stationType:
    * Return a String representation of a GasDataEntry as a csv line
    * @return csv line with all the case class values
    */
-  override def toString: String = s"$sellerId;$department;$stationType;$gasType;$price;" + GasDataEntry.datePrinter.format(date)
+  override def toString: String = {
+    val datePrinter: SimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd")
+    s"$sellerId;$department;$stationType;$gasType;$price;" + datePrinter.format(date)
+  }
+
 }
 
 /**

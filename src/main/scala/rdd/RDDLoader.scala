@@ -2,19 +2,25 @@ package rdd
 
 import java.text.SimpleDateFormat
 
+import org.apache.spark.sql.SparkSession
+import com.databricks.spark.xml._
 import dataentry.{GasDataEntry, GasType, StationType}
-import org.apache.spark.rdd.RDD
 import org.apache.spark.{SparkConf, SparkContext}
+import org.apache.spark.rdd.RDD
+import org.apache.spark.sql.functions.explode
 
 object RDDLoader {
+
   private val baseRange = (2007 to 2019)
-  private val appName = "GaSpark"
-  private val numberOfThreads = Runtime.getRuntime.availableProcessors()
-  private val conf = new SparkConf()
+  val appName = "GaSpark"
+  val numberOfThreads = Runtime.getRuntime.availableProcessors()
+  val conf = new SparkConf()
     .setAppName(appName)
     .setMaster(s"local[$numberOfThreads]")
     .set("spark.executor.memory", "4g")
-  val sc: SparkContext = SparkContext.getOrCreate(conf)
+  val sc = SparkContext.getOrCreate(conf)
+
+
 
   def main(args: Array[String]): Unit = {
     val b4 = System.currentTimeMillis()

@@ -1,43 +1,58 @@
 package rdd
-import java.io.PrintWriter
 
+import java.text.SimpleDateFormat
+
+import org.apache.spark.SparkConf
+import org.apache.spark.sql.functions.explode
+import com.databricks.spark.xml._
 import dataentry.{GasDataEntry, GasType, StationType}
-import org.apache.spark.{SparkConf, SparkContext}
-
-import scala.xml.{Elem, Node, XML}
+import org.apache.spark.sql.SparkSession
+import org.apache.spark.sql.types._
 
 private object RDDFileCreator extends App{
 
-  def createYearlyRDD(year: Int): Unit = {
-    val start = System.currentTimeMillis()
-    val dst = new PrintWriter(s"resources/rdd/$year")
+  val appName = "GaSpark"
+  val numberOfThreads = Runtime.getRuntime.availableProcessors()
+  val conf = new SparkConf()
+    .setAppName(appName)
+    .setMaster(s"local[$numberOfThreads]")
+    .set("spark.executor.memory", "4g")
+  val sp = SparkSession.builder().config(conf).getOrCreate()
+  import sp.implicits._
 
-    def isValid(e: GasDataEntry): Boolean = {
-      (e.gasType != GasType.UNDEFINED) &&
-        (e.stationType != StationType.UNDEFINED) &&
-        (e.price >= 300)
-    }
+  def createYearlyRDD(year: Int, xmlPath: String = "resources/sanitized/", rddPath: String = "resources/rdd/"): Unit = {
+    val begin = System.currentTimeMillis()
+    sp.read
+      .option("rowTag", "pdv")
+      .xml(xmlPath + year + ".xml")
+      .select("_cp", "_id", "_pop", "prix")
+      .withColumn("prix", explode($"prix"))
+      .select("_cp", "_id", "_pop", "prix._nom", "prix._valeur", "prix._maj")
+      .withColumn("_majtmp", $"_maj".cast(StringType))
+      .drop("_maj")
+      .withColumnRenamed("_majtmp", "_maj")
+      .rdd
+      .map { r =>
+        val datePrinter: SimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd")
+        val dateStr = r.getString(r.fieldIndex("_maj"))
+        val cutDate = if (dateStr contains 'T') dateStr.split('T')(0)
+            else if (dateStr contains ' ') dateStr.split(' ')(0)
+            else dateStr
 
-    (XML.loadFile(s"resources/sanitized/$year.xml") \ "pdv").toIterator
-      .foreach(n => {
-        val department = (n \@ "cp")
-        val seller = (n \@ "id")
-        val roadType = (n \@ "pop")
-        (n \ "prix").foreach(p => {
-          val entry = GasDataEntry.fromStringArguments(
-            seller,
-            department,
-            roadType,
-            (p \@ "nom"),
-            (p \@ "valeur"),
-            (p \@ "maj"))
-          if (isValid(entry)) dst.println(entry)
-        })
-
-    })
-    println(s"Year $year took " + (System.currentTimeMillis() - start) + "ms to complete")
+        GasDataEntry(
+          r.getLong(r.fieldIndex("_cp")).toInt,
+          r.getLong(r.fieldIndex("_id")).toInt,
+          StationType.fromString(r.getString(r.fieldIndex("_pop"))),
+          GasType.fromString(r.getString(r.fieldIndex("_nom"))),
+          r.getLong(r.fieldIndex("_valeur")).toInt,
+          datePrinter.parse(cutDate)
+        )
+      }.saveAsTextFile(rddPath + year)
+    val time = System.currentTimeMillis() - begin
+    println(s"Creating RDD-$year took ${time}ms")
   }
 
-  (2018 to 2018).foreach(createYearlyRDD)
+
+  (2007 to 2019).foreach(createYearlyRDD(_))
 
 }
