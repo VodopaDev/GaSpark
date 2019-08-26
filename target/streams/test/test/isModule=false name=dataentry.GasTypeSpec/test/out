@@ -7,5 +7,4 @@
 [0m[[0m[0minfo[0m] [0m[0m[32m  - when receiving E10[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32m  - when receiving E85[0m[0m
 [0m[[0m[0minfo[0m] [0m[0m[32m  - when receiving GPLc[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[31m  - when receiving incorrect value *** FAILED ***[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[31m    Undef did not equal GPLc (GasTypeSpec.scala:42)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m  - when receiving incorrect value[0m[0m
