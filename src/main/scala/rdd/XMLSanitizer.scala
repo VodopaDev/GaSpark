@@ -5,7 +5,7 @@ import java.io.PrintWriter
 import scala.io.Source
 
 object XMLSanitizer extends App{
-  def deleteRoguePriceTags(year: Int) = {
+  private def deleteRoguePriceTags(year: Int): Unit = {
     val start = System.currentTimeMillis()
     val src = Source.fromFile(s"resources/unsanitized/$year.xml")
     val dst = new PrintWriter("resources/sanitized/" + year + ".xml")

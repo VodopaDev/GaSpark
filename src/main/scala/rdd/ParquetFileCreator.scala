@@ -12,7 +12,8 @@ import org.apache.spark.sql.types._
 /**
  * Main object to parse the sanitized XML files into an exploitable RDD
  */
-private object RDDFileCreator extends App{
+//noinspection SpellCheckingInspection
+private object ParquetFileCreator extends App{
 
   val appName = "GaSpark-RDD-Creator"
   val numberOfThreads = Runtime.getRuntime.availableProcessors()
@@ -23,15 +24,15 @@ private object RDDFileCreator extends App{
   val sp = SparkSession.builder().config(conf).getOrCreate()
   import sp.implicits._
 
-  (2007 to 2007).foreach(y => createYearlyDataSet(year = y, rddPath = ""))
+  (2007 to 2019).foreach(createYearlyDataSet(_))
 
   /**
    * Parse the XML file containing yearly data into an easily parsable DataSet
    * @param year year data to parse
    * @param xmlPath path of the XML files
-   * @param rddPath destination path of the RDD
+   * @param dsPath destination path of the RDD
    */
-  def createYearlyDataSet(year: Int, xmlPath: String = "resources/sanitized/", rddPath: String = "resources/rdd/"): Unit = {
+  def createYearlyDataSet(year: Int, xmlPath: String = "resources/sanitized/", dsPath: String = "resources/dataset/"): Unit = {
     val begin = System.currentTimeMillis()
     sp.read
       .option("rowTag", "pdv")
@@ -54,7 +55,7 @@ private object RDDFileCreator extends App{
       }
       .filter(e => isValidGasEntry(e))
       .write
-      .parquet(rddPath + year)
+      .parquet(dsPath + year)
     val time = System.currentTimeMillis() - begin
     println(s"Creating RDD-$year took ${time}ms")
   }
