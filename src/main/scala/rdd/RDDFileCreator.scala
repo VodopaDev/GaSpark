@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat
 import org.apache.spark.SparkConf
 import org.apache.spark.sql.functions.explode
 import com.databricks.spark.xml._
-import dataentry.{GasDataEntry, GasType, StationType}
+import dataentry.{Date, GasDataEntry, GasType, StationType}
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.types._
 
@@ -42,24 +42,18 @@ private object RDDFileCreator extends App{
       .withColumnRenamed("_majtmp", "_maj")
       .rdd
       .map { r =>
-        val datePrinter: SimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd")
-        val dateStr = r.getString(r.fieldIndex("_maj"))
-        val cutDate = if (dateStr contains 'T') dateStr.split('T')(0)
-            else if (dateStr contains ' ') dateStr.split(' ')(0)
-            else dateStr
-
         GasDataEntry(
           r.getLong(r.fieldIndex("_cp")).toInt,
           r.getLong(r.fieldIndex("_id")).toInt,
           StationType.fromString(r.getString(r.fieldIndex("_pop"))),
           GasType.fromString(r.getString(r.fieldIndex("_nom"))),
           r.getLong(r.fieldIndex("_valeur")).toInt,
-          datePrinter.parse(cutDate)
+          Date(r.getString(r.fieldIndex("_maj")))
         )
       }.saveAsTextFile(rddPath + year)
     val time = System.currentTimeMillis() - begin
     println(s"Creating RDD-$year took ${time}ms")
   }
 
-  (2007 to 2019).foreach(createYearlyRDD(_))
+  (2007 to 2007).foreach(createYearlyRDD(_))
 }
