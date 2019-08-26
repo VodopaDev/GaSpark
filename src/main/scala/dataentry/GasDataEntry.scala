@@ -1,10 +1,5 @@
 package dataentry
 
-import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
-import java.util.Date
-
 import dataentry.GasType.GasType
 import dataentry.GasDataEntry.{Department, Price, SellerID}
 import dataentry.StationType.StationType
@@ -25,8 +20,7 @@ case class GasDataEntry(sellerId: SellerID, department: Department, stationType:
    * @return csv line with all the case class values
    */
   override def toString: String = {
-    val datePrinter: SimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd")
-    s"$sellerId;$department;$stationType;$gasType;$price;" + datePrinter.format(date)
+    s"$sellerId;$department;$stationType;$gasType;$price;$date"
   }
 
 }
@@ -39,8 +33,6 @@ object GasDataEntry{
   type SellerID = Int
   type Department = Int
   type Price = Int
-
-  val datePrinter: SimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd")
 
   /**
    * Creates a GasDataEntry from multiples String arguments
@@ -59,7 +51,7 @@ object GasDataEntry{
       StationType.fromString(stationType),
       GasType.fromString(gasType),
       price.toInt,
-      datePrinter.clone().asInstanceOf[SimpleDateFormat].parse(date)
+      Date(date)
     )
 
   /**
@@ -77,7 +69,7 @@ object GasDataEntry{
           StationType.fromString(stationTypeStr),
           GasType.fromString(gasTypeStr),
           priceStr.toInt,
-          datePrinter.clone().asInstanceOf[SimpleDateFormat].parse(dateStr)
+          Date(dateStr)
         )
     }
   }

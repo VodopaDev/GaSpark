@@ -27,7 +27,7 @@ object RDDLoader {
 
     val gazole = getRangeRdd()
         .filter(_.gasType == GasType.GAZOLE)
-        .map(e => ((e.stationType, (e.date.getYear+1900, e.date.getMonth+1)), (1, e.price.toLong)))
+        .map(e => ((e.stationType, (e.date.year, e.date.month)), (1, e.price.toLong)))
         .reduceByKey((t1, t2) => (t1._1 + t2._1, t1._2 + t2._2))
         .mapValues {case (count, total) => total / count}
         .map{ case ((station, date), avg) => (date, (station, avg))}
