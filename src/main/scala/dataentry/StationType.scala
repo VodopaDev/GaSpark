@@ -3,15 +3,24 @@ package dataentry
 /**
  * Simple enumeration to define all the possible types of selling spot of a gas station
  */
-object StationType extends Enumeration {
-  type StationType = Value
-  val AUTOROUTE: StationType = Value("A")
-  val ROUTE: StationType = Value("R")
-  val UNDEFINED: StationType = Value("U")
+object StationType {
 
-  private final val enums = this.values.toVector.map(t => (t.toString.toLowerCase, t)).toMap
-  def fromString(str: String): StationType = enums.get(str.toLowerCase) match {
+  sealed case class StationTypeValue(name: String){
+    override def toString: String = name
+  }
+  object Highway extends StationTypeValue("A")
+  object Road extends StationTypeValue("R")
+  object Undefined extends StationTypeValue("U")
+
+  private final val values = Vector(Highway,Road,Undefined).map(e => (e.name.toLowerCase, e)).toMap
+
+  /**
+   * Return a StationType from a string
+   * @param str string
+   * @return according StationType if it exists, Undefined otherwise
+   */
+  def fromString(str: String): StationTypeValue = values.get(str.toLowerCase) match {
     case Some(value) => value
-    case None => UNDEFINED
+    case None => Undefined
   }
 }

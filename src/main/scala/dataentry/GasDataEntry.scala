@@ -2,7 +2,7 @@ package dataentry
 
 import dataentry.GasType.GasType
 import dataentry.GasDataEntry.{Department, Price, SellerID}
-import dataentry.StationType.StationType
+import dataentry.StationType.StationTypeValue
 
 /**
  * Case class to represent a selling entry in some gas station
@@ -13,7 +13,7 @@ import dataentry.StationType.StationType
  * @param price price of the gas type
  * @param date date at which the gas price was updated
  */
-case class GasDataEntry(sellerId: SellerID, department: Department, stationType: StationType, gasType: GasType, price: Price, date: Date){
+case class GasDataEntry(sellerId: SellerID, department: Department, stationType: StationTypeValue, gasType: GasType, price: Price, date: Date){
 
   /**
    * Return a String representation of a GasDataEntry as a csv line

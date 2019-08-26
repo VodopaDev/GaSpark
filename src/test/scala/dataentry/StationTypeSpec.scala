@@ -8,18 +8,18 @@ class StationTypeSpec extends WordSpec{
     "return the correct station type" when {
 
       "receiving A" in {
-        assert(fromString("A") == AUTOROUTE)
-        assert(fromString("a") == AUTOROUTE)
+        assert(fromString("A") == Highway)
+        assert(fromString("a") == Highway)
       }
 
       "receiving R" in {
-        assert(fromString("R") == ROUTE)
-        assert(fromString("R") == ROUTE)
+        assert(fromString("R") == Road)
+        assert(fromString("R") == Road)
       }
 
       "receiving incorrect value" in {
-        assert(fromString("incorrect") == UNDEFINED)
-        assert(fromString("U") == UNDEFINED)
+        assert(fromString("incorrect") == Undefined)
+        assert(fromString("U") == Undefined)
       }
     }
   }

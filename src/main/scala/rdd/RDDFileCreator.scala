@@ -23,6 +23,8 @@ private object RDDFileCreator extends App{
   val sp = SparkSession.builder().config(conf).getOrCreate()
   import sp.implicits._
 
+  (2007 to 2007).foreach(createYearlyRDD(_))
+
   /**
    * Parse the XML file containing yearly data into an exploitable RDD
    * @param year year data to parse
@@ -50,10 +52,25 @@ private object RDDFileCreator extends App{
           r.getLong(r.fieldIndex("_valeur")).toInt,
           Date(r.getString(r.fieldIndex("_maj")))
         )
-      }.saveAsTextFile(rddPath + year)
+      }
+      .filter(isValidGasEntry)
+      .saveAsTextFile(rddPath + year)
     val time = System.currentTimeMillis() - begin
     println(s"Creating RDD-$year took ${time}ms")
   }
 
-  (2007 to 2007).foreach(createYearlyRDD(_))
+  /**
+   * Check if a GasDataEntry is valid
+   * @param e entry to check
+   * @return true if it is valid, false otherwise
+   */
+  private def isValidGasEntry(e: GasDataEntry): Boolean = {
+    (e.date < Date(2020,0,0) && e.date > Date(2006,12,31)) &&
+      e.price > 300 &&
+      e.gasType != GasType.UNDEFINED&&
+      e.stationType != StationType.Undefined &&
+      e.department > 0 &&
+      e.sellerId > 0
+  }
+
 }
