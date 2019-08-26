@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<testsuite hostname="MXPS-9350" name="dataentry.GasTypeSpec" tests="7" errors="0" failures="1" skipped="0" time="0.03" timestamp="2019-08-26T12:51:12">
+                     <properties>
+      <property name="awt.toolkit" value="sun.awt.X11.XToolkit"/><property name="java.specification.version" value="11"/><property name="sun.cpu.isalist" value=""/><property name="sun.jnu.encoding" value="UTF-8"/><property name="sun.arch.data.model" value="64"/><property name="sbt.supershell" value="false"/><property name="java.vendor.url" value="https://www.jetbrains.com/"/><property name="sun.boot.library.path" value="/opt/intellij/jbr/lib"/><property name="sun.java.command" value="/home/dev/.IntelliJIdea2019.2/config/plugins/Scala/launcher/sbt-launch.jar --addPluginSbtFile=/tmp/idea.sbt ; set ideaPort in Global := 41305 ; idea-shell"/><property name="jdk.debug" value="release"/><property name="java.specification.vendor" value="Oracle Corporation"/><property name="java.version.date" value="2019-04-16"/><property name="java.home" value="/opt/intellij/jbr"/><property name="file.separator" value="/"/><property name="java.vm.compressedOopsMode" value="32-bit"/><property name="line.separator" value="
+"/><property name="java.specification.name" value="Java Platform API Specification"/><property name="java.vm.specification.vendor" value="Oracle Corporation"/><property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/><property name="java.runtime.version" value="11.0.3+12-b304.10"/><property name="user.name" value="dev"/><property name="file.encoding" value="UTF-8"/><property name="jnidispatch.path" value="/tmp/jna-99349/jna16379285045560845431.tmp"/><property name="jna.loaded" value="true"/><property name="java.io.tmpdir" value="/tmp"/><property name="java.version" value="11.0.3"/><property name="java.vm.specification.name" value="Java Virtual Machine Specification"/><property name="java.awt.printerjob" value="sun.print.PSPrinterJob"/><property name="sun.os.patch.level" value="unknown"/><property name="java.library.path" value="/usr/java/packages/lib:/usr/lib64:/lib64:/lib:/usr/lib"/><property name="java.vendor" value="JetBrains s.r.o"/><property name="sun.io.unicode.encoding" value="UnicodeLittle"/><property name="java.class.path" value="/home/dev/.IntelliJIdea2019.2/config/plugins/Scala/launcher/sbt-launch.jar"/><property name="java.vm.vendor" value="JetBrains s.r.o"/><property name="jline.shutdownhook" value="false"/><property name="user.timezone" value="Europe/Paris"/><property name="os.name" value="Linux"/><property name="java.vm.specification.version" value="11"/><property name="sun.java.launcher" value="SUN_STANDARD"/><property name="user.country" value="US"/><property name="sun.cpu.endian" value="little"/><property name="user.home" value="/home/dev"/><property name="user.language" value="en"/><property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment"/><property name="jline.esc.timeout" value="0"/><property name="path.separator" value=":"/><property name="os.version" value="4.19.0-5-amd64"/><property name="jna.nosys" value="true"/><property name="java.runtime.name" value="OpenJDK Runtime Environment"/><property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/><property name="jna.platform.library.path" value="/usr/lib/x86_64-linux-gnu:/lib/x86_64-linux-gnu:/usr/lib64:/lib64:/usr/lib:/lib:/lib/i386-linux-gnu:/usr/lib/i386-linux-gnu:/usr/lib/x86_64-linux-gnu/libfakeroot"/><property name="java.vendor.url.bug" value="https://youtrack.jetbrains.com"/><property name="user.dir" value="/home/dev/IdeaProjects/GaSpark"/><property name="os.arch" value="amd64"/><property name="idea.managed" value="true"/><property name="java.vm.info" value="mixed mode"/><property name="java.vm.version" value="11.0.3+12-b304.10"/><property name="java.class.version" value="55.0"/>
+    </properties>
+                     <testcase classname="dataentry.GasTypeSpec" name="GasType should return the correct gas type when receiving SP95" time="0.015">
+                                                 
+                                               </testcase><testcase classname="dataentry.GasTypeSpec" name="GasType should return the correct gas type when receiving SP98" time="0.0">
+                                                 
+                                               </testcase><testcase classname="dataentry.GasTypeSpec" name="GasType should return the correct gas type when receiving Gazole" time="0.0">
+                                                 
+                                               </testcase><testcase classname="dataentry.GasTypeSpec" name="GasType should return the correct gas type when receiving E10" time="0.0">
+                                                 
+                                               </testcase><testcase classname="dataentry.GasTypeSpec" name="GasType should return the correct gas type when receiving E85" time="0.0">
+                                                 
+                                               </testcase><testcase classname="dataentry.GasTypeSpec" name="GasType should return the correct gas type when receiving GPLc" time="0.001">
+                                                 
+                                               </testcase><testcase classname="dataentry.GasTypeSpec" name="GasType should return the correct gas type when receiving incorrect value" time="0.014">
+                                                 <failure message="Undef did not equal GPLc" type="org.scalatest.exceptions.TestFailedException">org.scalatest.exceptions.TestFailedException: Undef did not equal GPLc
+	at org.scalatest.Assertions.newAssertionFailedException(Assertions.scala:530)
+	at org.scalatest.Assertions.newAssertionFailedException$(Assertions.scala:529)
+	at org.scalatest.WordSpec.newAssertionFailedException(WordSpec.scala:1881)
+	at org.scalatest.Assertions$AssertionsHelper.macroAssert(Assertions.scala:503)
+	at dataentry.GasTypeSpec.$anonfun$new$9(GasTypeSpec.scala:42)
+	at org.scalatest.OutcomeOf.outcomeOf(OutcomeOf.scala:85)
+	at org.scalatest.OutcomeOf.outcomeOf$(OutcomeOf.scala:83)
+	at org.scalatest.OutcomeOf$.outcomeOf(OutcomeOf.scala:104)
+	at org.scalatest.Transformer.apply(Transformer.scala:22)
+	at org.scalatest.Transformer.apply(Transformer.scala:20)
+	at org.scalatest.WordSpecLike$$anon$3.apply(WordSpecLike.scala:1075)
+	at org.scalatest.TestSuite.withFixture(TestSuite.scala:196)
+	at org.scalatest.TestSuite.withFixture$(TestSuite.scala:195)
+	at org.scalatest.WordSpec.withFixture(WordSpec.scala:1881)
+	at org.scalatest.WordSpecLike.invokeWithFixture$1(WordSpecLike.scala:1073)
+	at org.scalatest.WordSpecLike.$anonfun$runTest$1(WordSpecLike.scala:1085)
+	at org.scalatest.SuperEngine.runTestImpl(Engine.scala:286)
+	at org.scalatest.WordSpecLike.runTest(WordSpecLike.scala:1085)
+	at org.scalatest.WordSpecLike.runTest$(WordSpecLike.scala:1067)
+	at org.scalatest.WordSpec.runTest(WordSpec.scala:1881)
+	at org.scalatest.WordSpecLike.$anonfun$runTests$1(WordSpecLike.scala:1144)
+	at org.scalatest.SuperEngine.$anonfun$runTestsInBranch$1(Engine.scala:393)
+	at scala.collection.immutable.List.foreach(List.scala:388)
+	at org.scalatest.SuperEngine.traverseSubNodes$1(Engine.scala:381)
+	at org.scalatest.SuperEngine.runTestsInBranch(Engine.scala:370)
+	at org.scalatest.SuperEngine.$anonfun$runTestsInBranch$1(Engine.scala:407)
+	at scala.collection.immutable.List.foreach(List.scala:388)
+	at org.scalatest.SuperEngine.traverseSubNodes$1(Engine.scala:381)
+	at org.scalatest.SuperEngine.runTestsInBranch(Engine.scala:370)
+	at org.scalatest.SuperEngine.$anonfun$runTestsInBranch$1(Engine.scala:407)
+	at scala.collection.immutable.List.foreach(List.scala:388)
+	at org.scalatest.SuperEngine.traverseSubNodes$1(Engine.scala:381)
+	at org.scalatest.SuperEngine.runTestsInBranch(Engine.scala:376)
+	at org.scalatest.SuperEngine.runTestsImpl(Engine.scala:458)
+	at org.scalatest.WordSpecLike.runTests(WordSpecLike.scala:1144)
+	at org.scalatest.WordSpecLike.runTests$(WordSpecLike.scala:1143)
+	at org.scalatest.WordSpec.runTests(WordSpec.scala:1881)
+	at org.scalatest.Suite.run(Suite.scala:1124)
+	at org.scalatest.Suite.run$(Suite.scala:1106)
+	at org.scalatest.WordSpec.org$scalatest$WordSpecLike$$super$run(WordSpec.scala:1881)
+	at org.scalatest.WordSpecLike.$anonfun$run$1(WordSpecLike.scala:1189)
+	at org.scalatest.SuperEngine.runImpl(Engine.scala:518)
+	at org.scalatest.WordSpecLike.run(WordSpecLike.scala:1189)
+	at org.scalatest.WordSpecLike.run$(WordSpecLike.scala:1187)
+	at org.scalatest.WordSpec.run(WordSpec.scala:1881)
+	at org.scalatest.tools.Framework.org$scalatest$tools$Framework$$runSuite(Framework.scala:317)
+	at org.scalatest.tools.Framework$ScalaTestTask.execute(Framework.scala:510)
+	at sbt.TestRunner.runTest$1(TestFramework.scala:113)
+	at sbt.TestRunner.run(TestFramework.scala:124)
+	at sbt.TestFramework$$anon$2$$anonfun$$lessinit$greater$1.$anonfun$apply$1(TestFramework.scala:282)
+	at sbt.TestFramework$.sbt$TestFramework$$withContextLoader(TestFramework.scala:246)
+	at sbt.TestFramework$$anon$2$$anonfun$$lessinit$greater$1.apply(TestFramework.scala:282)
+	at sbt.TestFramework$$anon$2$$anonfun$$lessinit$greater$1.apply(TestFramework.scala:282)
+	at sbt.TestFunction.apply(TestFramework.scala:294)
+	at sbt.Tests$.$anonfun$toTask$1(Tests.scala:309)
+	at sbt.std.Transform$$anon$3.$anonfun$apply$2(System.scala:46)
+	at sbt.std.Transform$$anon$4.work(System.scala:67)
+	at sbt.Execute.$anonfun$submit$2(Execute.scala:269)
+	at sbt.internal.util.ErrorHandling$.wideConvert(ErrorHandling.scala:16)
+	at sbt.Execute.work(Execute.scala:278)
+	at sbt.Execute.$anonfun$submit$1(Execute.scala:269)
+	at sbt.ConcurrentRestrictions$$anon$4.$anonfun$submitValid$1(ConcurrentRestrictions.scala:178)
+	at sbt.CompletionService$$anon$2.call(CompletionService.scala:37)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+</failure>
+                                               </testcase>
+                     <system-out><![CDATA[]]></system-out>
+                     <system-err><![CDATA[]]></system-err>
+                   </testsuite>

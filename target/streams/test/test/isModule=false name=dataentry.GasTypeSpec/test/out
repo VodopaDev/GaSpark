@@ -1,0 +1,11 @@
+[0m[[0m[0minfo[0m] [0m[0m[32mGasTypeSpec:[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mGasType[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m  should return the correct gas type[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m  - when receiving SP95[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m  - when receiving SP98[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m  - when receiving Gazole[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m  - when receiving E10[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m  - when receiving E85[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m  - when receiving GPLc[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m  - when receiving incorrect value *** FAILED ***[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[31m    Undef did not equal GPLc (GasTypeSpec.scala:42)[0m[0m

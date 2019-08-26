@@ -4,7 +4,7 @@
 		module="gaspark_2.12"
 		revision="0.1"
 		status="integration"
-		publication="20190819131245"
+		publication="20190826084451"
 	>
 		<description>
 		GaSpark
@@ -34,5 +34,7 @@
 		<dependency org="org.scala-lang" name="scala-library" rev="2.12.7" conf="scala-tool->default,optional(default);compile->default(compile)"/>
 		<dependency org="org.scala-lang.modules" name="scala-xml_2.12" rev="1.2.0" conf="compile->default(compile)"/>
 		<dependency org="org.apache.spark" name="spark-sql_2.12" rev="2.4.3" conf="compile->default(compile)"/>
+		<dependency org="org.scalactic" name="scalactic_2.12" rev="3.0.8" conf="compile->default(compile)"/>
+		<dependency org="org.scalatest" name="scalatest_2.12" rev="3.0.8" conf="test->default(compile)"/>
 	</dependencies>
 </ivy-module>
