@@ -1,6 +1,0 @@
-[0m[[0m[0minfo[0m] [0m[0m[32mStationTypeSpec:[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[32mStationType[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[32m  should return the correct station type[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[32m  - when receiving A[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[32m  - when receiving R[0m[0m
-[0m[[0m[0minfo[0m] [0m[0m[32m  - when receiving incorrect value[0m[0m
