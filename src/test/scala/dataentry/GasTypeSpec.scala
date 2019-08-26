@@ -5,6 +5,7 @@ import dataentry.GasType._
 
 class GasTypeSpec extends WordSpec{
   "GasType" should{
+
     "return the correct gas type" when {
 
       "receiving SP95" in {
