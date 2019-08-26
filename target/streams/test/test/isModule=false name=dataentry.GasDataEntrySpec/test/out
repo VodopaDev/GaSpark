@@ -1,0 +1,6 @@
+[0m[[0m[0minfo[0m] [0m[0m[32mGasDataEntrySpec:[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mGasDataEntry[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m  should have correct values[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m  - when created from a RDD string[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m  - when created from a many strings[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should have a correct toString method[0m[0m

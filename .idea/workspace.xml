@@ -3,21 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="88150f11-0b5e-44a1-87ea-625f81676a94" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/src/test/scala/dataentry/GasDataEntrySpec.scala" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/scala/dataentry/StationTypeSpec.scala" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/scala-2.12/test-classes/dataentry/GasTypeSpec.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.12/test-classes/dataentry/GasTypeSpec.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/streams/compile/compile/$global/streams/out" beforeDir="false" afterPath="$PROJECT_DIR$/target/streams/compile/compile/$global/streams/out" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/streams/compile/compileIncremental/$global/streams/out" beforeDir="false" afterPath="$PROJECT_DIR$/target/streams/compile/compileIncremental/$global/streams/out" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/streams/test/$global/$global/definedTestNames/data" beforeDir="false" afterPath="$PROJECT_DIR$/target/streams/test/$global/$global/definedTestNames/data" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/streams/test/compileIncSetup/$global/streams/inc_compile_2.12.zip" beforeDir="false" afterPath="$PROJECT_DIR$/target/streams/test/compileIncSetup/$global/streams/inc_compile_2.12.zip" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/streams/test/compileIncremental/$global/streams/export" beforeDir="false" afterPath="$PROJECT_DIR$/target/streams/test/compileIncremental/$global/streams/export" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/streams/test/compileIncremental/$global/streams/out" beforeDir="false" afterPath="$PROJECT_DIR$/target/streams/test/compileIncremental/$global/streams/out" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/streams/test/definedTests/$global/streams/out" beforeDir="false" afterPath="$PROJECT_DIR$/target/streams/test/definedTests/$global/streams/out" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/streams/test/test/$global/streams/out" beforeDir="false" afterPath="$PROJECT_DIR$/target/streams/test/test/$global/streams/out" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/streams/test/test/$global/streams/succeeded_tests" beforeDir="false" afterPath="$PROJECT_DIR$/target/streams/test/test/$global/streams/succeeded_tests" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/streams/test/test/isModule=false name=dataentry.GasTypeSpec/test/out" beforeDir="false" afterPath="$PROJECT_DIR$/target/streams/test/test/isModule=false name=dataentry.GasTypeSpec/test/out" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-reports/TEST-dataentry.GasTypeSpec.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-reports/TEST-dataentry.GasTypeSpec.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-reports/dataentry.GasTypeSpec.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-reports/dataentry.GasTypeSpec.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -81,14 +67,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.RDDFileCreator">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
-      <module name="GaSpark" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JUnit.dataentry in GaSpark">
     <configuration name="RDDFileCreator" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="rdd.RDDFileCreator" />
       <module name="GaSpark" />
@@ -122,12 +101,48 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="dataentry in GaSpark" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="GaSpark" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="dataentry.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="dataentry" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GasTypeSpec" type="ScalaTestRunConfiguration" factoryName="ScalaTest" temporary="true" show_console_on_std_err="false" show_console_on_std_out="false">
+      <module name="GaSpark" />
+      <option name="allowRunningInParallel" value="false" />
+      <option name="testKind" value="Class" />
+      <option name="envs">
+        <map />
+      </option>
+      <option name="javaOptions" value="" />
+      <option name="jrePath" />
+      <option name="searchTest" value="Across module dependencies" />
+      <option name="showProgressMessages" value="true" />
+      <option name="testArgs" value="" />
+      <option name="testClassPath" value="dataentry.GasTypeSpec" />
+      <option name="testPackagePath" value="" />
+      <option name="useSbt" value="false" />
+      <option name="useUiWithSbt" value="false" />
+      <option name="workingDirectory" value="$PROJECT_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.dataentry in GaSpark" />
+        <item itemvalue="ScalaTest.GasTypeSpec" />
         <item itemvalue="Application.RDDFileCreator" />
         <item itemvalue="Application.RDDLoader" />
         <item itemvalue="Application.XMLSanitizer" />
-        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -178,5 +193,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/GaSpark$dataentry_in_GaSpark.ic" NAME="dataentry in GaSpark Coverage Results" MODIFIED="1566817804182" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>dataentry.*</FILTER>
+    </SUITE>
   </component>
 </project>
