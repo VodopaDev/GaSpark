@@ -6,7 +6,7 @@ import org.apache.spark.SparkConf
 import org.apache.spark.sql.functions.explode
 import com.databricks.spark.xml._
 import dataentry.{Date, GasDataEntry, GasTypeEnum, StationTypeEnum}
-import org.apache.spark.sql.SparkSession
+import org.apache.spark.sql.{DataFrame, Dataset, SaveMode, SparkSession}
 import org.apache.spark.sql.types._
 
 /**
@@ -23,15 +23,15 @@ private object RDDFileCreator extends App{
   val sp = SparkSession.builder().config(conf).getOrCreate()
   import sp.implicits._
 
-  (2007 to 2007).foreach(createYearlyRDD(_))
+  (2007 to 2007).foreach(y => createYearlyDataSet(year = y, rddPath = ""))
 
   /**
-   * Parse the XML file containing yearly data into an exploitable RDD
+   * Parse the XML file containing yearly data into an easily parsable DataSet
    * @param year year data to parse
    * @param xmlPath path of the XML files
    * @param rddPath destination path of the RDD
    */
-  def createYearlyRDD(year: Int, xmlPath: String = "resources/sanitized/", rddPath: String = "resources/rdd/"): Unit = {
+  def createYearlyDataSet(year: Int, xmlPath: String = "resources/sanitized/", rddPath: String = "resources/rdd/"): Unit = {
     val begin = System.currentTimeMillis()
     sp.read
       .option("rowTag", "pdv")
@@ -42,7 +42,6 @@ private object RDDFileCreator extends App{
       .withColumn("_majtmp", $"_maj".cast(StringType))
       .drop("_maj")
       .withColumnRenamed("_majtmp", "_maj")
-      .rdd
       .map { r =>
         GasDataEntry(
           r.getLong(r.fieldIndex("_cp")).toInt,
@@ -53,8 +52,9 @@ private object RDDFileCreator extends App{
           Date(r.getString(r.fieldIndex("_maj")))
         )
       }
-      .filter(isValidGasEntry)
-      .saveAsTextFile(rddPath + year)
+      .filter(e => isValidGasEntry(e))
+      .write
+      .parquet(rddPath + year)
     val time = System.currentTimeMillis() - begin
     println(s"Creating RDD-$year took ${time}ms")
   }
@@ -69,7 +69,7 @@ private object RDDFileCreator extends App{
       e.price > 300 &&
       e.gasType != GasTypeEnum.UNDEFINED&&
       e.stationType != StationTypeEnum.UNDEFINED &&
-      e.department > 0 &&
+      e.postalCode > 0 &&
       e.sellerId > 0
   }
 

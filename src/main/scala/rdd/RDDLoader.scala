@@ -18,14 +18,14 @@ object RDDLoader {
     .setAppName(appName)
     .setMaster(s"local[$numberOfThreads]")
     .set("spark.executor.memory", "4g")
-  val sc = SparkContext.getOrCreate(conf)
-
-
+  val ss = SparkSession.builder().config(conf).getOrCreate()
+  val sc = ss.sparkContext
+  import ss.implicits._
 
   def main(args: Array[String]): Unit = {
     val b4 = System.currentTimeMillis()
 
-    val gazole = getRangeRdd()
+    val gazole = yearlyRdd(2007)
         .filter(_.gasType == GasTypeEnum.GAZOLE)
         .map(e => ((e.stationType, (e.date.year, e.date.month)), (1, e.price.toLong)))
         .reduceByKey((t1, t2) => (t1._1 + t2._1, t1._2 + t2._2))
@@ -54,7 +54,7 @@ object RDDLoader {
    * @param year year of the record
    * @return RDD with the specific year values
    */
-  def yearlyRdd(year: Int): RDD[GasDataEntry] = sc.textFile("resources/rdd/" + year).map(GasDataEntry.fromRDDLine)
+  def yearlyRdd(year: Int): RDD[GasDataEntry] = ss.read.parquet(year.toString).map(GasDataEntry.apply).rdd
 
   /**
    * Get the union of RDDs from the given year to the end of the records
@@ -77,10 +77,8 @@ object RDDLoader {
    */
   def getRangeRdd(range: Range = baseRange): RDD[GasDataEntry] =
     clampRange(range)
-    .map(y => sc.textFile("resources/rdd/" + y))
+    .map(yearlyRdd)
     .reduce((acc, rdd) => acc.union(rdd))
-    .map(GasDataEntry.fromRDDLine)
-    .filter(e => e.price > 300 && e.stationType != StationTypeEnum.UNDEFINED && e.gasType != GasTypeEnum.UNDEFINED)
 
   /**
    * Clamped a given year so its correspond to a valid RDD
