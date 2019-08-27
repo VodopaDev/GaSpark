@@ -1,28 +1,17 @@
 package rdd
 
-import java.text.SimpleDateFormat
-
-import org.apache.spark.SparkConf
-import org.apache.spark.sql.functions.explode
-import com.databricks.spark.xml._
+import  org.apache.spark.sql.functions.explode
 import dataentry.{Date, GasDataEntry, GasTypeEnum, StationTypeEnum}
-import org.apache.spark.sql.{DataFrame, Dataset, SaveMode, SparkSession}
 import org.apache.spark.sql.types._
+import SparkConfiguration.ss
+import SparkConfiguration.ss.implicits._
+import com.databricks.spark.xml._
 
 /**
  * Main object to parse the sanitized XML files into an exploitable RDD
  */
 //noinspection SpellCheckingInspection
 private object ParquetFileCreator extends App{
-
-  val appName = "GaSpark-RDD-Creator"
-  val numberOfThreads = Runtime.getRuntime.availableProcessors()
-  val conf = new SparkConf()
-    .setAppName(appName)
-    .setMaster(s"local[$numberOfThreads]")
-    .set("spark.executor.memory", "4g")
-  val sp = SparkSession.builder().config(conf).getOrCreate()
-  import sp.implicits._
 
   (2007 to 2019).foreach(createYearlyDataSet(_))
 
@@ -34,7 +23,7 @@ private object ParquetFileCreator extends App{
    */
   def createYearlyDataSet(year: Int, xmlPath: String = "resources/sanitized/", dsPath: String = "resources/dataset/"): Unit = {
     val begin = System.currentTimeMillis()
-    sp.read
+    ss.read
       .option("rowTag", "pdv")
       .xml(xmlPath + year + ".xml")
       .select("_cp", "_id", "_pop", "prix")
