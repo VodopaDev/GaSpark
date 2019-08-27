@@ -1,11 +1,12 @@
-package query.utils
+package query.configuration
 
 import dataentry.GasTypeEnum
 import dataentry.GasTypeEnum.GasType
 import org.rogach.scallop.ScallopOption
+import query.utils.GranularityEnum
 import query.utils.GranularityEnum.Granularity
 
-object DefaultArgs {
+object DefaultArgsBehaviour {
 
   def getGranularityOrDefault(opt: ScallopOption[String]): Granularity = opt.get match {
     case Some(value) => GranularityEnum.fromString(value)
@@ -26,5 +27,4 @@ object DefaultArgs {
     case Some(value) => GasTypeEnum.fromString(value)
     case None => GasTypeEnum.GAZOLE
   }
-
 }

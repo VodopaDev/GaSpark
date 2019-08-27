@@ -1,12 +1,10 @@
 package query.compare
 
-import dataentry.GasTypeEnum
 import dataentry.StationTypeEnum.{HIGHWAY, ROAD, StationType}
 import org.apache.spark.rdd.RDD
 import query.configuration.StationTypeCompareConf
 import query.utils.GranularityEnum
 import rdd.DataSetLoader
-import query.utils.DefaultArgs._
 
 object StationTypeCompare extends BaseCompare[StationTypeCompareConf] {
 
@@ -16,17 +14,12 @@ object StationTypeCompare extends BaseCompare[StationTypeCompareConf] {
       .sortBy(_._2)
 
   def computeWithConfig(conf: StationTypeCompareConf): Int = {
-    val from = getFromOrDefault(conf.from)
-    val to = getToOrDefault(conf.to)
-    val granularity = getGranularityOrDefault(conf.granularity)
-    val gasType = getGasTypeOrDefault(conf.gasType)
-
     val all: RDD[((StationType, String), Double)] =
-      DataSetLoader.getRangeDataset(from to to)
+      DataSetLoader.getRangeDataset(conf.from to conf.to)
         .rdd
-        .filter(e => e.gasType == gasType)
+        .filter(e => e.gasType == conf.gasType)
         .map(e => {
-          val dateStr = granularity match {
+          val dateStr = conf.granularity match {
             case GranularityEnum.YEAR => f"${e.date.year}%04d"
             case GranularityEnum.MONTH => f"${e.date.year}%04d-${e.date.month}%02d"
             case GranularityEnum.DAY => e.date.toString
@@ -41,8 +34,8 @@ object StationTypeCompare extends BaseCompare[StationTypeCompareConf] {
     val highway = filterMapAndSortOnFinalValue(all, HIGHWAY)
     val road = filterMapAndSortOnFinalValue(all, ROAD)
 
-    highway.zip(road).collect().foreach(t => println(gasType.name + t))
-    1
+    highway.zip(road).collect().foreach(t => println(conf.gasType.name + t))
+    road.count().toInt
   }
 
 
