@@ -57,7 +57,7 @@ private object ParquetFileCreator extends App{
   private def isValidGasEntry(e: GasDataEntry): Boolean = {
     (e.date < Date(2020,0,0) && e.date > Date(2006,12,31)) &&
       e.price > 300 &&
-      e.gasType != GasTypeEnum.UNDEFINED&&
+      e.gasType != GasTypeEnum.UNDEFINED &&
       e.stationType != StationTypeEnum.UNDEFINED &&
       e.postalCode > 0 &&
       e.sellerId > 0

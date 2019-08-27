@@ -1,7 +1,7 @@
 package rdd
 
 import dataentry.GasDataEntry
-import SparkConfiguration.{ss,sc}
+import SparkConfiguration.ss
 import SparkConfiguration.ss.implicits._
 import org.apache.spark.sql.Dataset
 
