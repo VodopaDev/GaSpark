@@ -5,20 +5,6 @@ import rdd.DataSetLoader._
 object Main extends App {
   val b4 = System.currentTimeMillis()
 
-  var fromYear = Int.MinValue
-  var toYear = Int.MaxValue
-
-  def parseArgs(args: List[String]): Int = args match {
-    case Nil => 0
-    case "--from" :: start :: tail =>
-      if (start.toInt > toYear) toYear = start.toInt
-      parseArgs(tail)
-    case "--to" :: to :: tail =>
-      if (toYear > fromYear) toYear = to.toInt
-      parseArgs(tail)
-
-  }
-
   def rddMap = {
     val gazole = getRangeDataset(2007 to 2019)
       .rdd
