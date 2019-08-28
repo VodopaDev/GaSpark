@@ -52,6 +52,11 @@ object GasDataEntry{
       Date(date)
     )
 
+  /**
+   * Creates a GasDataEntry from a DataFrame row
+   * @param dfRow DataFrame row
+   * @return GasDataEntry with row's arguments as its values
+   */
   def apply(dfRow: Row): GasDataEntry = {
     val date = dfRow.getStruct(dfRow.fieldIndex("date"))
     val gas = dfRow.getStruct(dfRow.fieldIndex("gasType"))
@@ -64,26 +69,6 @@ object GasDataEntry{
       dfRow.getInt(dfRow.fieldIndex("price")),
       Date(date.getShort(0), date.getShort(1), date.getShort(2))
     )
-  }
-
-  /**
-   * Creates a GasDataEntry from the line of a txt-form RDD
-   * This line must have all values separated by semicolons (;)
-   * @param line line containing the GasDataEntry (all members separated by semicolons)
-   * @return GasDataEntry with corresponding values
-   */
-  def apply(line: String): GasDataEntry = {
-    line.split(";").toVector match {
-      case sellerIdStr +: countyStr +: stationTypeStr +: gasTypeStr +: priceStr +: dateStr +: _ =>
-        GasDataEntry(
-          sellerIdStr.toInt,
-          countyStr.toInt,
-          StationTypeEnum.fromString(stationTypeStr),
-          GasTypeEnum.fromString(gasTypeStr),
-          priceStr.toInt,
-          Date(dateStr)
-        )
-    }
   }
 }
 

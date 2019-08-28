@@ -37,7 +37,7 @@ object DataSetLoader {
    */
   def getRangeDataset(range: Range = baseRange): Dataset[GasDataEntry] =
     clampRange(range)
-      .map(y => ss.read.parquet(s"resources/dataset/$y"))
+      .map(y => ss.read.parquet(s"dataset/$y"))
       .reduce((a1,a2) => a1.union(a2))
       .map(GasDataEntry.apply)
 
