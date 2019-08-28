@@ -1,9 +1,9 @@
-import query.compare.StationTypeCompare
-import query.configuration.StationTypeCompareConf
+import configuration.StationTypeCompareConf
+import query.StationTypeComparisonQuery
 
 object Main extends App {
 
   val conf = new StationTypeCompareConf(args)
-  println(StationTypeCompare.computeWithConfig(conf))
+  StationTypeComparisonQuery.computeWithConfig(conf)
 
 }
