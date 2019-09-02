@@ -1,6 +1,7 @@
 package configuration
+import org.rogach.scallop.ScallopOption
 
 class SimpleConf(args: Seq[String]) extends BaseConf(args){
-  val stationType = opt[String](default = None)
-  val gasType = opt[String](default = None)
+  val stationType: ScallopOption[String] = opt[String](default = None)
+  val gasType: ScallopOption[String] = opt[String](default = None)
 }

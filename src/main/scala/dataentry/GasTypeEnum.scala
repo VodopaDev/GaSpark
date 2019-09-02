@@ -16,14 +16,15 @@ object GasTypeEnum {
   object SP98 extends GasType("SP98")
   object UNDEFINED extends GasType("U")
 
-  private final val values = Vector(GAZOLE,GPLc,E10,E85,SP95,SP98).map(e => (e.name.toLowerCase, e)).toMap
+  final val values: Vector[GasType] = Vector(GAZOLE,GPLc,E10,E85,SP95,SP98)
+  private final val valuesMap = values.map(e => (e.name.toLowerCase, e)).toMap
 
   /**
    * Return a GasType from a string
    * @param str string
    * @return according GasType if it exists, UNDEFINED otherwise
    */
-  def fromString(str: String): GasType = values.get(str.toLowerCase) match {
+  def fromString(str: String): GasType = valuesMap.get(str.toLowerCase) match {
     case Some(value) => value
     case None => UNDEFINED
   }

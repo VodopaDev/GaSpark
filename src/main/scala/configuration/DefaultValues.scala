@@ -14,5 +14,6 @@ object DefaultValues {
   val defaultYearRange: Range.Inclusive = defaultYearFrom to defaultYearTo
 
   val defaultVerbose = false
-  val defaultSavePath = "result.txt"
+  val defaultSavePath = "result/"
+  val defaultFileName = "result.txt"
 }

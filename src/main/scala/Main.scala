@@ -1,5 +1,5 @@
-import configuration.StationTypeCompareConf
-import query.StationTypeComparisonQuery
+import configuration.{GasTypeCompareConf, StationTypeCompareConf}
+import query.{GasTypeComparisonQuery, StationTypeComparisonQuery}
 
 object Main extends App {
 

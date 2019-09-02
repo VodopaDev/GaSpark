@@ -11,4 +11,5 @@ object SparkConfiguration {
     .setMaster(s"local[$numberOfThreads]")
     .set("spark.executor.memory", "4g")
   val ss: SparkSession = SparkSession.builder().config(sc).getOrCreate()
+  //ss.sparkContext.setLogLevel("ERROR")
 }
