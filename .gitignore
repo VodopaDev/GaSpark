@@ -1,5 +1,6 @@
 # Ignore all RDD or XML resources
 resources/
+result/*
 
 /.ipynb_checkpoints
 
